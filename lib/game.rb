@@ -23,7 +23,7 @@ class Game
         guess = gets.chomp.downcase
       end
     end
-    puts guess
+    guess
   end
 end
 
