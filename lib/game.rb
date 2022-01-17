@@ -47,16 +47,20 @@ class Game
   end
 
   def corect_guess(guess)
-    indices = @word_array.each_index.find_all{ |i| @word_array[i] == guess}
+    indices = @word_array.each_index.find_all{ |i| downcase_word_array[i] == guess}
     indices.each{ |i| @dashes[i] = @word_array[i]}
   end
 
+  def downcase_word_array
+    @word_array.map { |i| i.downcase }
+  end
+
   def play_game
-    binding.pry
+    #binding.pry
     while @incorrect_guesses_remaining > 0 && @dashes != @word_array
       draw_board
       guess = player_guess
-      if @word_array.include?(guess)
+      if downcase_word_array.include?(guess)
         puts "You guessed a letter right"
         corect_guess(guess)
       else
