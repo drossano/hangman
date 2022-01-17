@@ -36,14 +36,16 @@ class Game
   end
 
   def play_game
-    draw_board
-    if @word_array.include?(player_guess)
-      puts "You guessed a letter right"
-    else
-      puts "You guessed an incorrect letter"
-      @incorrect_guesses_remaining -= 1
+    while @incorrect_guesses_remaining > 0
+      draw_board
+      if @word_array.include?(player_guess)
+        puts "You guessed a letter right"
+      else
+        puts "You guessed an incorrect letter"
+        @incorrect_guesses_remaining -= 1
+      end
     end
-    draw_board
+    puts "You ran out of chances, game over" if @incorrect_guesses_remaining == 0
   end
 end
 
