@@ -1,7 +1,9 @@
 require_relative 'word_picker.rb'
 class Game
   def initialize
-    @word = WordPicker.new.word
+    word_picker = WordPicker.new
+    @word = word_picker.word
+    @word_array = word_picker.word_array
   end
 
   def draw_dashes(word)

@@ -1,9 +1,10 @@
 class WordPicker
-  attr_reader :word
+  attr_accessor :word, :word_array
   def initialize
     @dictionary = IO.new(IO.sysopen 'dictionary.txt')
     @word_list = Array.new
     @word = create_word_list.sample
+    @word_array = @word.chars
   end
 
   def create_word_list
