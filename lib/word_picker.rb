@@ -3,10 +3,18 @@ class WordPicker
   def initialize
     @dictionary = IO.new(IO.sysopen 'dictionary.txt')
     @word_list = Array.new
-    @word = create_word_list.sample
-    @word_array = @word.chars
+    @word = pick_word(create_word_list)
+    @word_array = make_word_array(@word)
   end
 
+  def pick_word(word_list)
+    word_list.sample
+  end
+
+  def make_word_array(word)
+    word.chars
+  end
+  
   def create_word_list
       until @dictionary.eof? == true do
         word = @dictionary.gets.chomp
