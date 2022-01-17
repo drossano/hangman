@@ -7,15 +7,16 @@ class Game
     @word_array = word_picker.word_array
     @incorrect_guesses_remaining = 6
     @incorrect_letters = []
+    @dashes = draw_dashes(@word)
     puts @word
   end
 
   def draw_dashes(word)
-    Array.new(word.length, "_").join(" ")
+    Array.new(word.length, "_")
   end
 
   def draw_board
-    puts draw_dashes(@word)
+    puts @dashes.join(" ")
     puts "#{@incorrect_guesses_remaining} incorrect guesses remaining"
     unless @incorrect_letters.empty?
       puts "Inorrect Guesses:"
@@ -45,13 +46,19 @@ class Game
     guess
   end
 
+  def corect_guess(guess)
+    indices = @word_array.each_index.find_all{ |i| @word_array[i] == guess}
+    indices.each{ |i| @dashes[i] = @word_array[i]}
+  end
+
   def play_game
-    #inding.pry
-    while @incorrect_guesses_remaining > 0
+    binding.pry
+    while @incorrect_guesses_remaining > 0 && @dashes != @word_array
       draw_board
       guess = player_guess
       if @word_array.include?(guess)
         puts "You guessed a letter right"
+        corect_guess(guess)
       else
         puts "You guessed an incorrect letter"
         @incorrect_guesses_remaining -= 1
@@ -59,6 +66,7 @@ class Game
       end
     end
     puts "You ran out of chances, game over" if @incorrect_guesses_remaining == 0
+    puts "You got the word right!" if @dashes == @word_array
   end
 
   def collect_incorect_letters(incorrect_guess)
