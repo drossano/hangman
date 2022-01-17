@@ -4,8 +4,17 @@ class Game
     @word = WordPicker.new.word
   end
 
-  def draw_dashes
-    dashes = Array.new(@word.length, "_").join(" ")
+  def draw_dashes(word)
+    Array.new(word.length, "_").join(" ")
+  end
+
+  def draw_board
+    puts draw_dashes(@word)
+    puts "#{track_incorrect_guesses} incorrect guesses remaining"
+  end
+
+  def track_incorrect_guesses
+    incorrect_guesses_remaining = 6
   end
 
   def player_guess
@@ -25,6 +34,11 @@ class Game
     end
     guess
   end
+
+  def play_game
+    draw_board
+    player_guess
+  end
 end
 
-Game.new.player_guess
+Game.new.play_game
