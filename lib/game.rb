@@ -8,7 +8,7 @@ class Game
     @incorrect_guesses_remaining = 6
     @incorrect_letters = []
     @dashes = draw_dashes(@word)
-    puts @word
+    puts @word # For testing purposes
   end
 
   def draw_dashes(word)
@@ -56,7 +56,6 @@ class Game
   end
 
   def play_game
-    #binding.pry
     while @incorrect_guesses_remaining > 0 && @dashes != @word_array
       draw_board
       guess = player_guess
@@ -69,10 +68,10 @@ class Game
         collect_incorect_letters(guess)
       end
     end
+    draw_board
     puts "You ran out of chances, game over" if @incorrect_guesses_remaining == 0
     puts "You got the word right!" if @dashes == @word_array
   end
-
   def collect_incorect_letters(incorrect_guess)
     @incorrect_letters.push(incorrect_guess)
   end
