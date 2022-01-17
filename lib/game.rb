@@ -25,34 +25,36 @@ class Game
   end
 
   def player_guess
-    puts prompt = "Enter a letter that you would like to guess or enter \"save\" if you would like to save you game."
-    guess = gets.chomp.downcase
+    guess = guess_prompt
     loop do
-      if @incorrect_letters.include?(guess)
+      if @incorrect_letters.include?(guess) || downcase_array(@dashes).include?(guess)
         puts "You have already guessed this letter."
-        puts prompt
-        guess = gets.chomp.downcase
+        guess = guess_prompt
       elsif guess.match?(/[a-z]/) && guess.length == 1
         break
       elsif guess == "save"
         puts "This featrues is not yet implemented"
-        puts prompt
-        guess = gets.chomp.downcase
+        guess = guess_prompt
       else
-        puts "Invalid guess #{prompt}"
-        guess = gets.chomp.downcase
+        puts "Invalid guess"
+        guess = guess_prompt
       end
     end
     guess
   end
 
-  def corect_guess(guess)
-    indices = @word_array.each_index.find_all{ |i| downcase_word_array[i] == guess}
-    indices.each{ |i| @dashes[i] = @word_array[i]}
+  def downcase_array(array)
+    array.map { |i| i.downcase }
   end
 
-  def downcase_word_array
-    @word_array.map { |i| i.downcase }
+  def guess_prompt
+    puts "Enter a letter that you would like to guess or enter \"save\" if you would like to save you game."
+    gets.chomp.downcase
+  end
+
+  def corect_guess(guess)
+    indices = @word_array.each_index.find_all{ |i| downcase_array(@word_array)[i] == guess}
+    indices.each{ |i| @dashes[i] = @word_array[i]}
   end
 
   def play_game
@@ -72,6 +74,7 @@ class Game
     puts "You ran out of chances, game over" if @incorrect_guesses_remaining == 0
     puts "You got the word right!" if @dashes == @word_array
   end
+
   def collect_incorect_letters(incorrect_guess)
     @incorrect_letters.push(incorrect_guess)
   end
