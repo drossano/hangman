@@ -20,7 +20,7 @@ class Game
     puts "#{@incorrect_guesses_remaining} incorrect guesses remaining"
     unless @incorrect_letters.empty?
       puts "Inorrect Guesses:"
-      p @incorrect_letters
+      puts @incorrect_letters.join(", ")
     end
   end
 
