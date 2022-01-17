@@ -4,7 +4,7 @@ class Game
     word_picker = WordPicker.new
     @word = word_picker.word
     @word_array = word_picker.word_array
-    @incorrect_guesses = 6
+    @incorrect_guesses_remaining = 6
     puts @word
   end
 
@@ -14,7 +14,7 @@ class Game
 
   def draw_board
     puts draw_dashes(@word)
-    puts "#{track_incorrect_guesses} incorrect guesses remaining"
+    puts "#{@incorrect_guesses_remaining} incorrect guesses remaining"
   end
 
   def player_guess
@@ -41,7 +41,9 @@ class Game
       puts "You guessed a letter right"
     else
       puts "You guessed an incorrect letter"
+      @incorrect_guesses_remaining -= 1
     end
+    draw_board
   end
 end
 
