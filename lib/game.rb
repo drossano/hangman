@@ -4,6 +4,7 @@ class Game
     word_picker = WordPicker.new
     @word = word_picker.word
     @word_array = word_picker.word_array
+    puts @word
   end
 
   def draw_dashes(word)
@@ -39,7 +40,11 @@ class Game
 
   def play_game
     draw_board
-    player_guess
+    if @word_array.include?(player_guess)
+      puts "You guessed a letter right"
+    else
+      puts "You guessed an incorrect letter"
+    end
   end
 end
 

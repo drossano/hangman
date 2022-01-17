@@ -4,7 +4,7 @@ class WordPicker
     @dictionary = IO.new(IO.sysopen 'dictionary.txt')
     @word_list = Array.new
     @word = pick_word(create_word_list)
-    @word_array = make_word_array(@word)
+    @word_array = make_word_array(@word.downcase)
   end
 
   def pick_word(word_list)
