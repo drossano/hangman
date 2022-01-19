@@ -9,7 +9,7 @@ if save_and_load.check_for_file
   if response == "y"
     p saved_game = save_and_load.load_game
     saved_game.play_game
-  elsif response == n
+  elsif response == "n"
     Game.new.play_game
   end
 else
