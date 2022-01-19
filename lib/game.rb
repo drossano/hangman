@@ -1,4 +1,5 @@
 require_relative 'word_picker.rb'
+require_relative 'save_and_load.rb'
 require "pry-byebug"
 class Game
   def initialize
@@ -33,8 +34,8 @@ class Game
       elsif guess.match?(/[a-z]/) && guess.length == 1
         break
       elsif guess == "save"
-        puts "This featrues is not yet implemented"
-        guess = guess_prompt
+        SaveAndLoad.new.save_game(self)
+        exit
       else
         puts "Invalid guess"
         guess = guess_prompt
@@ -61,7 +62,7 @@ class Game
     while @incorrect_guesses_remaining > 0 && @dashes != @word_array
       draw_board
       guess = player_guess
-      if downcase_word_array.include?(guess)
+      if downcase_array(@word_array).include?(guess)
         puts "You guessed a letter right"
         corect_guess(guess)
       else
