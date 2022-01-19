@@ -3,7 +3,7 @@ require "./lib/save_and_load.rb"
 require "./lib/word_picker.rb"
 
 save_and_load = SaveAndLoad.new
-if save_and_load.check_for_file
+if File.exist?("./saved_games/saved_game.yaml")
   puts "A saved game is detected. Would you like to resume it?"
   response = gets.chomp
   if response == "y"

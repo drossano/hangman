@@ -34,14 +34,27 @@ class Game
       elsif guess.match?(/[a-z]/) && guess.length == 1
         break
       elsif guess == "save"
-        SaveAndLoad.new.save_game(self)
-        exit
+        overwrite_check
       else
         puts "Invalid guess"
         guess = guess_prompt
       end
     end
     guess
+  end
+
+  def overwrite_check
+    if File.exist?("./saved_games/saved_game.yaml")
+      puts "A saved game already exists. Would you like to overwrite it?"
+      response = gets.chomp
+      if response == "y"
+        SaveAndLoad.new.save_game(self)
+      elsif response == "n"
+        play_game
+      end
+    else
+      SaveAndLoad.new.save_game(self)
+    end
   end
 
   def downcase_array(array)
@@ -74,7 +87,7 @@ class Game
     draw_board
     puts "You ran out of chances, game over" if @incorrect_guesses_remaining == 0
     puts "You got the word right!" if @dashes == @word_array
-    File.delete("./saved_games/saved_game.yaml")
+    File.delete("./saved_games/saved_game.yaml") if File.exist?("./saved_games/saved_game.yaml")
   end
 
   def collect_incorect_letters(incorrect_guess)
