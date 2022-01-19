@@ -80,5 +80,3 @@ class Game
     @incorrect_letters.push(incorrect_guess)
   end
 end
-
-Game.new.play_game

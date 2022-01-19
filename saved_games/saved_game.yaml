@@ -1,0 +1,29 @@
+--- !ruby/object:Game
+word: foreshorten
+word_array:
+- f
+- o
+- r
+- e
+- s
+- h
+- o
+- r
+- t
+- e
+- n
+incorrect_guesses_remaining: 5
+incorrect_letters:
+- p
+dashes:
+- f
+- o
+- _
+- _
+- _
+- _
+- o
+- _
+- _
+- _
+- _
