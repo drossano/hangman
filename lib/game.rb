@@ -87,7 +87,6 @@ class Game
     draw_board
     puts "You ran out of chances, game over" if @incorrect_guesses_remaining == 0
     puts "You got the word right!" if @dashes == @word_array
-    File.delete("./saved_games/saved_game.yaml") if File.exist?("./saved_games/saved_game.yaml")
   end
 
   def collect_incorect_letters(incorrect_guess)

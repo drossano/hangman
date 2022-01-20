@@ -9,6 +9,7 @@ if File.exist?("./saved_games/saved_game.yaml")
   if response == "y"
     p saved_game = save_and_load.load_game
     saved_game.play_game
+    File.delete("./saved_games/saved_game.yaml")
   elsif response == "n"
     Game.new.play_game
   end
