@@ -2,6 +2,7 @@ require_relative 'word_picker.rb'
 require_relative 'save_and_load.rb'
 require "pry-byebug"
 class Game
+  include SaveAndLoad
   def initialize
     word_picker = WordPicker.new
     @word = word_picker.word
@@ -48,12 +49,12 @@ class Game
       puts "A saved game already exists. Would you like to overwrite it?"
       response = gets.chomp
       if response == "y"
-        SaveAndLoad.new.save_game(self)
+        save_game(self)
       elsif response == "n"
         play_game
       end
     else
-      SaveAndLoad.new.save_game(self)
+      save_game(self)
     end
   end
 
