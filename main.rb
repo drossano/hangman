@@ -3,13 +3,14 @@ require "./lib/save_and_load.rb"
 require "./lib/word_picker.rb"
 
 include SaveAndLoad
-if File.exist?("./saved_games/saved_game.yaml")
+serialized_file = "./saved_games/saved_game.yaml"
+if File.exist?(serialized_file)
   puts "A saved game is detected. Would you like to resume it?"
   response = gets.chomp
   if response == "y"
     p saved_game = load_game
     saved_game.play_game
-    File.delete("./saved_games/saved_game.yaml")
+    File.delete(serialized_file)
   elsif response == "n"
     Game.new.play_game
   end
