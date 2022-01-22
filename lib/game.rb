@@ -45,12 +45,14 @@ class Game
   end
 
   def overwrite_check
+    saved_feedback = "Game successfully saved."
     if File.exist?("./saved_games/saved_game.yaml")
       puts "A saved game already exists. Would you like to overwrite it? (Enter \"yes\" or \"no\")"
       response = gets.chomp.downcase
       loop do
         if response == "yes"
           save_game(self)
+          puts saved_feedback
           break
         elsif response == "no"
           play_game
@@ -62,6 +64,7 @@ class Game
       end
     else
       save_game(self)
+      puts saved_feedback
     end
   end
 
