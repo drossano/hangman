@@ -9,7 +9,7 @@ if File.exist?(serialized_file)
   response = gets.chomp.downcase
   loop do
     if response == "yes"
-      p saved_game = load_game
+      saved_game = load_game
       saved_game.play_game
       File.delete(serialized_file)
       break
