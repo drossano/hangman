@@ -18,8 +18,12 @@ class Game
 
   def draw_board
     puts @dashes.join(" ")
-    puts "#{@incorrect_guesses_remaining} incorrect guesses remaining"
+    puts "#{@incorrect_guesses_remaining} incorrect guess#{check_incorrect_guess_plurality} remaining"
     puts "Inorrect Guesses: \n#{@incorrect_letters.join(", ")}" unless @incorrect_letters.empty?
+  end
+
+  def check_incorrect_guess_plurality
+    "es" if @incorrect_guesses_remaining != 1
   end
 
   def player_guess
