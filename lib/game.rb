@@ -10,7 +10,6 @@ class Game
     @incorrect_guesses_remaining = 6
     @incorrect_letters = []
     @dashes = draw_dashes(@word)
-    puts @word # For testing purposes
   end
 
   def draw_dashes(word)
