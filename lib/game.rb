@@ -45,14 +45,12 @@ class Game
   end
 
   def overwrite_check
-    saved_feedback = "Game successfully saved."
     if File.exist?("./saved_games/saved_game.yaml")
       puts "A saved game already exists. Would you like to overwrite it? (Enter \"yes\" or \"no\")"
       response = gets.chomp.downcase
       loop do
         if response == "yes"
           save_game(self)
-          puts saved_feedback
           break
         elsif response == "no"
           play_game
@@ -64,7 +62,6 @@ class Game
       end
     else
       save_game(self)
-      puts saved_feedback
     end
   end
 
@@ -96,7 +93,7 @@ class Game
       end
     end
     draw_board
-    puts "You ran out of chances, game over" if @incorrect_guesses_remaining == 0
+    puts "You ran out of chances, game over. The word was #{@word}." if @incorrect_guesses_remaining == 0
     puts "You got the word right!" if @dashes == @word_array
   end
 
