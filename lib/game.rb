@@ -1,6 +1,6 @@
 require_relative 'word_picker.rb'
 require_relative 'save_and_load.rb'
-require "pry-byebug"
+
 class Game
   include SaveAndLoad
   def initialize
