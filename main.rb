@@ -3,6 +3,7 @@ require "./lib/save_and_load.rb"
 require "./lib/word_picker.rb"
 
 include SaveAndLoad
+puts "Welcome to Hangman!"
 serialized_file = "./saved_games/saved_game.yaml"
 if File.exist?(serialized_file)
   puts "A saved game is detected. Would you like to resume it? (Enter \"yes\" or \"no\")"
