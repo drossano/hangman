@@ -1,0 +1,27 @@
+--- !ruby/object:Game
+word: figurative
+word_array:
+- f
+- i
+- g
+- u
+- r
+- a
+- t
+- i
+- v
+- e
+incorrect_guesses_remaining: 5
+incorrect_letters:
+- z
+dashes:
+- f
+- i
+- g
+- u
+- r
+- a
+- t
+- i
+- _
+- _

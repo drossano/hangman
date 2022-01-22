@@ -46,11 +46,11 @@ class Game
 
   def overwrite_check
     if File.exist?("./saved_games/saved_game.yaml")
-      puts "A saved game already exists. Would you like to overwrite it?"
-      response = gets.chomp
-      if response == "y"
+      puts "A saved game already exists. Would you like to overwrite it? (Enter \"yes\" or \"no\")"
+      response = gets.chomp.downcase
+      if response == "yes"
         save_game(self)
-      elsif response == "n"
+      elsif response == "no"
         play_game
       end
     else
