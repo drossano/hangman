@@ -20,10 +20,7 @@ class Game
   def draw_board
     puts @dashes.join(" ")
     puts "#{@incorrect_guesses_remaining} incorrect guesses remaining"
-    unless @incorrect_letters.empty?
-      puts "Inorrect Guesses:"
-      puts @incorrect_letters.join(", ")
-    end
+    puts "Inorrect Guesses: \n#{@incorrect_letters.join(", ")}" unless @incorrect_letters.empty?
   end
 
   def player_guess
