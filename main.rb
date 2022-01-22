@@ -15,6 +15,7 @@ if File.exist?(serialized_file)
       break
     elsif response == "no"
       Game.new.play_game
+      break
     else
       puts "Invaled choice. Enter \"yes\" or \"no\" if you would like to resume your saved game."
       response = gets.chomp.downcase

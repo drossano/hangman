@@ -48,10 +48,17 @@ class Game
     if File.exist?("./saved_games/saved_game.yaml")
       puts "A saved game already exists. Would you like to overwrite it? (Enter \"yes\" or \"no\")"
       response = gets.chomp.downcase
-      if response == "yes"
-        save_game(self)
-      elsif response == "no"
-        play_game
+      loop do
+        if response == "yes"
+          save_game(self)
+          break
+        elsif response == "no"
+          play_game
+          break
+        else
+          puts "Invaled choice. Enter \"yes\" or \"no\" if you would like to overwrite your saved game."
+          response = gets.chomp.downcase
+        end
       end
     else
       save_game(self)
