@@ -26,11 +26,11 @@ class Game
     "es" if @incorrect_guesses_remaining != 1
   end
 
-  def validate_guess(guess)
+  def validate_guess_input(guess)
     if @incorrect_letters.include?(guess) || downcase_array(@dashes).include?(guess)
       previously_guessed
     elsif guess.match?(/[a-z]/) && guess.length == 1
-      guess
+      check_guess(guess)
     elsif guess == "save"
       overwrite_check
     else
@@ -74,9 +74,10 @@ class Game
   end
 
   def guess_prompt
+    draw_board
     puts "Enter a letter that you would like to guess or enter \"save\" if you would like to save you game."
     guess = gets.chomp.downcase
-    validate_guess(guess)
+    validate_guess_input(guess)
   end
 
   def corect_guess(guess)
@@ -86,20 +87,22 @@ class Game
 
   def play_game
     while @incorrect_guesses_remaining > 0 && @dashes != @word_array
-      draw_board
-      guess = guess_prompt
-      if downcase_array(@word_array).include?(guess)
-        puts "You guessed a letter right"
-        corect_guess(guess)
-      else
-        puts "You guessed an incorrect letter"
-        @incorrect_guesses_remaining -= 1
-        collect_incorect_letters(guess)
-      end
+      guess_prompt
     end
     draw_board
     puts "You ran out of chances, game over. The word was #{@word}." if @incorrect_guesses_remaining == 0
     puts "You got the word right!" if @dashes == @word_array
+  end
+
+  def check_guess(guess)
+    if downcase_array(@word_array).include?(guess)
+      puts "You guessed a letter right"
+      corect_guess(guess)
+    else
+      puts "You guessed an incorrect letter"
+      @incorrect_guesses_remaining -= 1
+      collect_incorect_letters(guess)
+    end
   end
 
   def collect_incorect_letters(incorrect_guess)
