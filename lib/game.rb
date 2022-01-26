@@ -50,25 +50,25 @@ class Game
 
   def overwrite_check
     if File.exist?("./saved_games/saved_game.yaml")
-      puts "A saved game already exists. Would you like to overwrite it? (Enter \"yes\" or \"no\")"
-      validate_overwrite_response(gets.chomp.downcase)
+      overwrite_prompt
     else
       save_game(self)
     end
   end
 
+  def overwrite_prompt
+    puts "A saved game already exists. Would you like to overwrite it? (Enter \"yes\" or \"no\")"
+    validate_overwrite_response(gets.chomp.downcase)
+  end
+
   def validate_overwrite_response(response)
-    loop do
-      if response == "yes"
-        save_game(self)
-        break
-      elsif response == "no"
-        play_game
-        break
-      else
-        puts "Invaled choice. Enter \"yes\" or \"no\" if you would like to overwrite your saved game."
-        response = gets.chomp.downcase
-      end
+    if response == "yes"
+      save_game(self)
+    elsif response == "no"
+      play_game
+    else
+      puts "Invaled choice. Enter \"yes\" or \"no\" if you would like to overwrite your saved game."
+      overwrite_prompt
     end
   end
 
