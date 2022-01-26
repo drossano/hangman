@@ -26,22 +26,26 @@ class Game
     "es" if @incorrect_guesses_remaining != 1
   end
 
-  def player_guess
-    guess = guess_prompt
-    loop do
-      if @incorrect_letters.include?(guess) || downcase_array(@dashes).include?(guess)
-        puts "You have already guessed this letter."
-        guess = guess_prompt
-      elsif guess.match?(/[a-z]/) && guess.length == 1
-        break
-      elsif guess == "save"
-        overwrite_check
-      else
-        puts "Invalid guess"
-        guess = guess_prompt
-      end
+  def validate_guess(guess)
+    if @incorrect_letters.include?(guess) || downcase_array(@dashes).include?(guess)
+      previously_guessed
+    elsif guess.match?(/[a-z]/) && guess.length == 1
+      guess
+    elsif guess == "save"
+      overwrite_check
+    else
+      invalid_guess
     end
-    guess
+  end
+
+  def previously_guessed
+    puts "You have already guessed this letter."
+    guess_prompt
+  end
+
+  def invalid_guess
+    puts "Invalid guess"
+    guess_prompt
   end
 
   def overwrite_check
@@ -71,7 +75,8 @@ class Game
 
   def guess_prompt
     puts "Enter a letter that you would like to guess or enter \"save\" if you would like to save you game."
-    gets.chomp.downcase
+    guess = gets.chomp.downcase
+    validate_guess(guess)
   end
 
   def corect_guess(guess)
@@ -82,7 +87,7 @@ class Game
   def play_game
     while @incorrect_guesses_remaining > 0 && @dashes != @word_array
       draw_board
-      guess = player_guess
+      guess = guess_prompt
       if downcase_array(@word_array).include?(guess)
         puts "You guessed a letter right"
         corect_guess(guess)
