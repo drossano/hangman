@@ -9,7 +9,7 @@ class Game
     @word_array = word_picker.word_array
     @incorrect_guesses_remaining = 6
     @incorrect_letters = []
-    @dashes = draw_dashes(@word)
+    @hidden_word = draw_dashes(@word)
   end
 
   def draw_dashes(word)
@@ -17,7 +17,7 @@ class Game
   end
 
   def draw_board
-    puts @dashes.join(" ")
+    puts @hidden_word.join(" ")
     puts "#{@incorrect_guesses_remaining} incorrect guess#{check_incorrect_guess_plurality} remaining"
     puts "Inorrect Guesses: \n#{@incorrect_letters.join(", ")}" unless @incorrect_letters.empty?
   end
@@ -27,7 +27,7 @@ class Game
   end
 
   def validate_guess_input(guess)
-    if @incorrect_letters.include?(guess) || downcase_array(@dashes).include?(guess)
+    if @incorrect_letters.include?(guess) || downcase_array(@hidden_word).include?(guess)
       previously_guessed
     elsif guess.match?(/[a-z]/) && guess.length == 1
       check_guess(guess)
@@ -85,16 +85,16 @@ class Game
 
   def corect_guess(guess)
     indices = @word_array.each_index.find_all{ |i| downcase_array(@word_array)[i] == guess}
-    indices.each{ |i| @dashes[i] = @word_array[i]}
+    indices.each{ |i| @hidden_word[i] = @word_array[i]}
   end
 
   def play_game
-    while @incorrect_guesses_remaining > 0 && @dashes != @word_array
+    while @incorrect_guesses_remaining > 0 && @hidden_word != @word_array
       guess_prompt
     end
     draw_board
     puts "You ran out of chances, game over. The word was #{@word}." if @incorrect_guesses_remaining == 0
-    puts "You got the word right!" if @dashes == @word_array
+    puts "You got the word right!" if @hidden_word == @word_array
   end
 
   def check_guess(guess)
