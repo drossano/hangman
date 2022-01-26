@@ -1,0 +1,22 @@
+--- !ruby/object:Game
+word: Camaguey
+word_array:
+- C
+- a
+- m
+- a
+- g
+- u
+- e
+- y
+incorrect_guesses_remaining: 6
+incorrect_letters: []
+dashes:
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
